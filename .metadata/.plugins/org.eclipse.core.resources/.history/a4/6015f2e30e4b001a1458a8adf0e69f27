@@ -1,0 +1,137 @@
+package com.capgemini.storesmanagement.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.capgemini.storesmanagement.dto.UserDetailsInfo;
+
+public class AdminDaoImpl implements AdminDao{
+	static Logger log=LogManager.getLogger("Admin class");
+  Connection con=null;
+  PreparedStatement ps=null;
+  ResultSet rs=null;
+
+	@Override
+	public void loginAdmin(UserDetailsInfo info) {
+		
+	}
+
+	@Override
+	public void addManufacturer(UserDetailsInfo info1) {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			String dburl = "jdbc:mysql://localhost:3306/stores_management_db";
+			con = DriverManager.getConnection(dburl, "root", "root");
+			String query = "insert into userdetailsinfo values(?,?,?,?,?,?)";
+
+			ps = con.prepareStatement(query);
+			ps.setInt(1,info1.getUserId());
+			ps.setString(2, info1.getUserName());
+			ps.setString(3,info1.getEmail());
+			ps.setString(4,info1.getPassword());
+			ps.setString(5,info1.getAddress());
+			ps.setString(6, info1.getUserRole());
+
+			int count = ps.executeUpdate();
+			log.info("no of rows affected: " + count);
+
+		} catch (Exception e) {
+			log.info("Exception in login records");
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+
+			} catch (SQLException e) {
+				log.info("Exception in login records 1");
+			}
+		}
+		
+	}
+
+	@Override
+	public void updateManufacturer(UserDetailsInfo info2) {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			String dburl = "jdbcmysqllocalhost3306/stores_management_db";
+			con = DriverManager.getConnection(dburl," root", "root");
+			String query = "update userDetailsInfo set userName= WHERE userId=?";
+            ps = con.prepareStatement(query);
+			ps.setString(1,info2.getUserName());
+			ps.setInt(2, info2.getUserId());
+
+
+			int count = ps.executeUpdate();
+			System.out.println("no of rows affected " + count);
+
+		} catch (Exception e) {
+			log.info("Exception arises");
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+
+			} catch (SQLException e) {
+				log.info("Exception came");
+			}
+		}
+
+		
+	}
+
+	@Override
+	public void deleteManufacturer(UserDetailsInfo info3) {
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			String dburl = "jdbc:mysql://localhost:3306/stores_management_db";
+			con = DriverManager.getConnection(dburl, "root", "hr");
+			String query = "delete from userDetailsInfo where userName=?";
+
+			ps = con.prepareStatement(query);
+
+			ps.setString(1, info3.getUserName());
+
+
+			int count = ps.executeUpdate();
+			log.info("no of rows affected: " + count);
+
+		} catch (Exception e) {
+			log.info("Exception 1");
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+
+			} catch (SQLException e) {
+				log.info("Hello Exception");
+			}
+		}
+
+
+
+		
+	}
+
+}

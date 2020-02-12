@@ -1,0 +1,106 @@
+package com.capgemini.storesmanagementsystem.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.storesmanagementsystem.dto.UserDetailsInfo;
+
+public class AdminDaoImpl implements AdminDao {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	Statement stmt = null;
+
+	@Override
+	public List<String> loginAdmin(String userId, String password) {
+		List<String> userdetailsinfo = new ArrayList<String>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String dburl = "jdbc:mysql://localhost:3306/stores_management_system?user=root&password=root";
+			con = DriverManager.getConnection(dburl);
+			String qry = "select * from users_info where userId ='" + userId + "' and password='" + password + "'";
+			pstmt = con.prepareStatement(qry);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				userdetailsinfo.add(rs.getString("userId"));
+				userdetailsinfo.add(rs.getString("password"));
+
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+		return userdetailsinfo;
+	}
+
+	@Override
+	public boolean addManufacturer(UserDetailsInfo user) {
+		boolean isAdded = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String dburl = "jdbc:mysql://localhost:3306/storemanagement?user=root&password=root";
+			con = DriverManager.getConnection(dburl);
+			String qry = " insert into  users_info  values (?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(qry);
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(6, user.getUserName());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setString(2,user.getEmail());
+			pstmt.setString(3,user.getAddress());
+			pstmt.setString(5, user.getUserRole());
+			int r = pstmt.executeUpdate();
+			System.out.println(r);
+
+			if (r != 0) {
+				isAdded = true;
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return isAdded=true;
+	}
+
+	@Override
+	public boolean updateManufacturer(String userId, UserDetailsInfo user) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String dburl = "jdbc:mysql://localhost:3306/storemanagement?user=root&password=root";
+			Connection con = DriverManager.getConnection(dburl);
+
+			String qry = "update users_info set userName=?,location=?,password=? where userId='" + userId + "' ";
+			pstmt = con.prepareStatement(qry);
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getAddress());
+			pstmt.setString(3, user.getPassword());
+			 pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+		return false;
+	}
+
+	@Override
+	public boolean deleteManufacturer(String userId) {
+		return false;
+	}
+
+	@Override
+	public List<String> viewAllManufacturer() {
+		return null;
+	}
+
+}

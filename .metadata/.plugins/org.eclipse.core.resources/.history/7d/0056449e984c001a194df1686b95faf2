@@ -1,0 +1,81 @@
+package com.capgemini.storesmanagementsystem.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.chainsaw.Main;
+
+import com.capgemini.storesmanagementsystem.dto.ProductDetailsInfo;
+import com.capgemini.storesmanagementsystem.dto.ProductDetailsInfo;
+import com.capgemini.storesmanagementsystem.dto.UserDetailsInfo;
+
+public class ManufacturerDaoImpl implements ManufacturerDao {
+
+	@Override
+	public List<String> loginManufacturer(String userId, String password) {
+		return null;
+	}
+
+	@Override
+	public boolean addDealer(UserDetailsInfo dealer) {
+		return false;
+	}
+
+	@Override
+	public boolean modifyDealer(String user) {
+		return false;
+	}
+
+	@Override
+	public boolean removeDealer(String dealerId) {
+		return false;
+	}
+
+	@Override
+	public List<String> viewAllDealers(String role) {
+		return null;
+	}
+
+	@Override
+	public boolean addProduct(ProductDetailsInfo product) {
+		return false;
+	}
+
+	@Override
+	public boolean modifyProduct(String product) {
+		return false;
+	}
+
+	@Override
+	public boolean removeProduct(Integer productId) {
+		return false;
+	}
+
+	@Override
+	public List<String> viewAllProducts() {
+		return null;
+	}
+
+	@Override
+	public List<String> viewAllOrders() {
+		return null;
+	}
+
+	@Override
+	public List<String> viewStore() {
+		return null;
+	}
+	
+			
+
+
+
+
+}

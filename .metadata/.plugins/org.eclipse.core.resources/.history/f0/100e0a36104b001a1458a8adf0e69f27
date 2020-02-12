@@ -1,0 +1,33 @@
+package com.capgemini.storesmanagement.dao;
+
+import com.capgemini.storesmanagement.dto.OrderDetailsInfo;
+
+public class DealerDaoImpl implements DealerDao {
+
+	@Override
+	public OrderDetailsInfo loginDealer(OrderDetailsInfo info) {
+		return null;
+	}
+
+	@Override
+	public void makeOrder(OrderDetailsInfo info1) {
+		
+	}
+
+	@Override
+	public void deleteOrder(OrderDetailsInfo info2) {
+		
+	}
+
+	@Override
+	public void viewMyOrder(OrderDetailsInfo info3) {
+		
+	}
+
+	@Override
+	public void viewMyStore(OrderDetailsInfo info4) {
+		
+	}
+	
+}
+

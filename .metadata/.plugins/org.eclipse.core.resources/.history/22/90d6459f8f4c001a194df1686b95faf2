@@ -1,0 +1,23 @@
+package com.capgemini.storesmanagementsystem.controller;
+
+import java.util.Scanner;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.capgemini.storesmanagementsystem.service.AdminService;
+import com.capgemini.storesmanagementsystem.service.AdminServiceImpl;
+
+public class MainController {
+	static Logger log=LogManager.getLogger(MainController.class);
+	static Scanner sc=new Scanner(System.in);
+	public static void main(String[] args) {
+
+
+		AdminService adminService=new AdminServiceImpl();
+	}
+
+
+
+
+}
